@@ -1,5 +1,6 @@
 # arm_gt_v2
-![diagram](https://raw.githubusercontent.com/jumpincrane/arm_gt_v2/main/estimationdiagram.PNG?token=ATZJZ3T3NW4XYGUACZJ4V73BUCWCO)
+![diagram](https://raw.githubusercontent.com/jumpincrane/arm_gt_v2/main/estimationdiagram.PNG?)
+
 Funkcje poszczególnych bloków diagramu:
 * Input generator - generator wejść (trajektorii);
 * Robot node - model kinematyczny pojazdu;
