@@ -7,6 +7,8 @@ Podstawy estymacji stanu robotów autonomicznych i wprowadzenie do filtru Kalman
 * Klaudia Sagat
 * Michał heit
 
+## Część I: Zamodelowanie modelu robota i wizualizacja przebytej ścieżki
+
 ![diagram](https://github.com/jumpincrane/arm_gt_v2/blob/main/estimationdiagram.PNG)
 
 Funkcje poszczególnych bloków diagramu:
