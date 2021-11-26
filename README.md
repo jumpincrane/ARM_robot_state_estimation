@@ -1,5 +1,5 @@
 # arm_gt_v2
-![diagram](https://raw.githubusercontent.com/jumpincrane/arm_gt_v2/main/estimationdiagram.PNG?)
+![diagram](https://github.com/jumpincrane/arm_gt_v2/blob/main/estimationdiagram.PNG)
 
 Funkcje poszczególnych bloków diagramu:
 * Input generator - generator wejść (trajektorii);
