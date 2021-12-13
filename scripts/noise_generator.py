@@ -9,15 +9,18 @@ input_data = [0, 0, 0]
 
 
 def callback_input(data):
-    u1 = data.linear.x
-    u2 = data.linear.y
-    theta = data.angular.z
+    # POBIERA WEJSCIE I JE ZASZUMIA <0;1>
+    np.random.rand()
+    u1 = data.linear.x + np.random.rand()
+    u2 = data.linear.y + np.random.rand()
+    theta = data.angular.z + np.random.rand()
 
     global input_data
     input_data = [u1, u2, theta]
 
 
 def calculations(u1, u2, theta, delta_t):
+    # WYSYLA ODOMETRIE WYLICZONA Z ZASZUMIONEGO WEJSCIA
     our_odom = Odometry()
     beta = u1 * delta_t
     l = 1
@@ -35,20 +38,19 @@ def calculations(u1, u2, theta, delta_t):
     our_odom.header.stamp = rospy.Time.now()
     our_odom.pose.pose = Pose(Point(0, 0, 0), Quaternion(0, 0, 0, 1))
     our_odom.twist.twist = Twist(Vector3(q_d[0], q_d[1], 0), Vector3(0, 0, q_d[2]))
-    print(q_d[0], q_d[1], q_d[2], beta)
+
     return our_odom
 
 
 def main():
-    odometry_pub = rospy.Publisher('Odometry_pub', Odometry, queue_size=10)
+    odometry_pub = rospy.Publisher('noised_odometry_pub', Odometry, queue_size=10)
     rospy.Subscriber("/input_signal", Twist, callback_input)
-    rospy.init_node('robot_node', anonymous=True)
+    rospy.init_node('noise_generator_node', anonymous=True)
     rate = rospy.Rate(10)
     i = 0
     delta_t = 0.1
     our_odom = Odometry()
     while not rospy.is_shutdown():
-
         if i == 0:
             our_odom.header.frame_id = 'map'
             our_odom.header.stamp = rospy.Time.now()
@@ -57,6 +59,7 @@ def main():
 
         our_odom = calculations(input_data[0], input_data[1], input_data[2], delta_t)
         odometry_pub.publish(our_odom)
+        print(our_odom)
 
         i += 1
         rate.sleep()
