@@ -4,6 +4,6 @@
     <node name="robot_node" pkg="arm_gt"  type="robot_node.py" />
     <node name="noise_generator_node" pkg="arm_gt"  type="noise_generator.py" />
     <node name="state_estimator_node" pkg="arm_gt"  type="state_estimator.py" />
-    <node name="rviz" pkg="rviz" type="rviz"/>
+    <node name="rviz" pkg="rviz" type="rviz" args="-d $(find arm_gt)/rviz/rviz.rviz"/>
 
 </launch>

@@ -11,8 +11,8 @@ def signal_gen():
     signal = Twist()
     i = 0
     while not rospy.is_shutdown():
-        signal.linear.x = np.sin(2 * np.pi * i / 4000) * 20
-        signal.linear.y = np.cos(2 * np.pi * i / 3000) * 20
+        signal.linear.x = np.sin(2 * np.pi * i / 4000)
+        signal.linear.y = np.cos(2 * np.pi * i / 4000)
         signal.linear.z = 0
         signal.angular.x = 0
         signal.angular.y = 0

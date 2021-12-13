@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 import rospy
 from geometry_msgs.msg import Twist, Pose, Point, Quaternion, Vector3
-from tf.transformations import euler_from_quaternion
+from tf.transformations import euler_from_quaternion, quaternion_from_euler
 from nav_msgs.msg import Odometry
 import numpy as np
 
 input_data = [0, 0, 0]
-
+pos = [0, 0]
 
 def callback_input(data):
     # POBIERA WEJSCIE I JE ZASZUMIA <0;1>
@@ -33,11 +33,20 @@ def calculations(u1, u2, theta, delta_t):
 
     q_d = matrixA @ v
 
+    # obliczanie pozycji i inkrementowanie jej o przemieszczenie
+    x = q_d[1] * delta_t
+    y = q_d[2] * delta_t
+    global pos
+    pos[0] = pos[0] + x
+    pos[1] = pos[1] + y
+
+    quat = quaternion_from_euler(0, 0, beta)
+    quat = Quaternion(quat[0], quat[1], quat[2], quat[3])
     # trzeba przypisac wynik do zmiennej rosowej our_odom
     our_odom.header.frame_id = 'map'
     our_odom.header.stamp = rospy.Time.now()
-    our_odom.pose.pose = Pose(Point(0, 0, 0), Quaternion(0, 0, 0, 1))
-    our_odom.twist.twist = Twist(Vector3(q_d[0], q_d[1], 0), Vector3(0, 0, q_d[2]))
+    our_odom.pose.pose = Pose(Point(0, 0, 0), quat)
+    our_odom.twist.twist = Twist(Vector3(q_d[1], q_d[2], 0), Vector3(0, 0, q_d[0]))
 
     return our_odom
 
