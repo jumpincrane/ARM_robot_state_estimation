@@ -37,7 +37,8 @@ def calculations(u1, u2, theta, delta_t):
     pos[0] = pos[0] + x
     pos[1] = pos[1] + y
 
-    quat = quaternion_from_euler(0, 0, beta)
+    quat = quaternion_from_euler(0, 0, theta)
+
     quat = Quaternion(quat[0], quat[1], quat[2], quat[3])
     # trzeba przypisac wynik do zmiennej rosowej our_odom
     our_odom.header.frame_id = 'map'

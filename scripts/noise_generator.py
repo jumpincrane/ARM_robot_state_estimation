@@ -11,9 +11,9 @@ pos = [0, 0]
 def callback_input(data):
     # POBIERA WEJSCIE I JE ZASZUMIA <0;1>
     np.random.rand()
-    u1 = data.linear.x + np.random.rand()
-    u2 = data.linear.y + np.random.rand()
-    theta = data.angular.z + np.random.rand()
+    u1 = data.linear.x + np.random.rand() * 0.2
+    u2 = data.linear.y + np.random.rand() * 0.2
+    theta = data.angular.z + np.random.rand() * 0.2
 
     global input_data
     input_data = [u1, u2, theta]
@@ -40,13 +40,13 @@ def calculations(u1, u2, theta, delta_t):
     pos[0] = pos[0] + x
     pos[1] = pos[1] + y
 
-    quat = quaternion_from_euler(0, 0, beta)
+    quat = quaternion_from_euler(0, 0, theta)
     quat = Quaternion(quat[0], quat[1], quat[2], quat[3])
     # trzeba przypisac wynik do zmiennej rosowej our_odom
     our_odom.header.frame_id = 'map'
     our_odom.header.stamp = rospy.Time.now()
-    our_odom.pose.pose = Pose(Point(0, 0, 0), quat)
-    our_odom.twist.twist = Twist(Vector3(q_d[1], q_d[2], 0), Vector3(0, 0, q_d[0]))
+    our_odom.pose.pose = Pose(Point(pos[0], pos[1], 0), quat)
+    our_odom.twist.twist = Twist(Vector3(q_d[1], q_d[2], 0), Vector3(0, theta, q_d[0]))
 
     return our_odom
 

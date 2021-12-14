@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <launch>
     <node name="input_generator_node" pkg="arm_gt"  type="input_generator.py" />
-    <node name="robot_node" pkg="arm_gt"  type="robot_node.py" />
+    <node name="robot_node" pkg="arm_gt"  type="robot_node.py" output="screen"/>
     <node name="noise_generator_node" pkg="arm_gt"  type="noise_generator.py" />
     <node name="state_estimator_node" pkg="arm_gt"  type="state_estimator.py" />
     <node name="rviz" pkg="rviz" type="rviz" args="-d $(find arm_gt)/rviz/rviz.rviz"/>
