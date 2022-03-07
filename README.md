@@ -17,3 +17,11 @@ Funkcje poszczególnych bloków diagramu:
 * Noise generator node - generator zaszumień (wejść i modelu kinamatycznego);
 * RVIZ - wizualizacja ścieżki;
 * Sate estimator node - węzeł publikujący zaszumione wejścia.  
+
+## Uruchomienie
+Jest to paczka ROS1:
+* Tworzymy workspace dla ROS
+* Budujemy workspace
+* W folderze source klonujemy paczke
+* z poziomu workspace'u możemy włączyć paczkę za pomocą launch'a
+roslaunch ARM_robot_state_estimation arm_gt.launch
