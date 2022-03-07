@@ -24,4 +24,4 @@ Jest to paczka ROS1:
 * Budujemy workspace
 * W folderze source klonujemy paczke
 * z poziomu workspace'u możemy włączyć paczkę za pomocą launch'a
-roslaunch ARM_robot_state_estimation arm_gt.launch
+'roslaunch ARM_robot_state_estimation arm_gt.launch'
